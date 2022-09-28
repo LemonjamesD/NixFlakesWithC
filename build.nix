@@ -20,7 +20,7 @@ pkgs.stdenv.mkDerivation rec {
         mkdir -p "$out/bin/"
     '';
     buildPhase = ''
-        clang -c $(find $src -name "*.$extension") -I $include
+        clang -c $(find $src -name "*.$extension") -I "$(find $include -type d)"
         mv $(find . -name "*.o") $out
         clang -B mold $out/*.o -o $out/bin/$pname
     '';
